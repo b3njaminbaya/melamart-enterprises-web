@@ -33,14 +33,14 @@ const ContactSection = () => {
       address: "Off Eastern Bypass, Ruiru, Kenya",
       phone: "+254 712 345 678",
       mapUrl: "https://www.google.com/maps/place/1%C2%B009'42.7%22S+36%C2%B056'54.3%22E/@-1.16186,36.94841,17z",
-      embedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d997.5!2d36.94841!3d-1.16186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMDknNDIuNyJTIDM2wrA1Nic1NC4zIkU!5e0!3m2!1sen!2ske!4v1",
+      embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1994.5!2d36.94841!3d-1.16186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMcKwMDknNDIuNyJTIDM2wrA1Nic1NC4zIkU!5e0!3m2!1sen!2ske!4v1",
     },
     {
       name: "Kikuyu Branch",
       address: "Kikuyu Town, Kiambu County, Kenya",
       phone: "+254 798 765 432",
-      mapUrl: "https://www.google.com/maps/search/Kikuyu+Kenya",
-      embedUrl: "",
+      mapUrl: "https://www.google.com/maps/place/Kikuyu,+Kenya/@-1.2470,36.6816,15z",
+      embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.5!2d36.6716!3d-1.2470!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1a6b5c5b5b5b%3A0x5b5b5b5b5b5b5b5b!2sKikuyu%2C%20Kenya!5e0!3m2!1sen!2ske!4v1",
     },
   ];
 
@@ -87,6 +87,21 @@ const ContactSection = () => {
                 {locations.map((location, index) => (
                   <div key={index} className="pb-5 border-b border-border last:border-b-0 last:pb-0">
                     <h4 className="font-semibold text-foreground mb-3">{location.name}</h4>
+                    
+                    {/* Embedded Map */}
+                    <div className="rounded-lg overflow-hidden mb-3 border border-border">
+                      <iframe
+                        src={location.embedUrl}
+                        width="100%"
+                        height="150"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        title={`Map - ${location.name}`}
+                      />
+                    </div>
+                    
                     <div className="space-y-3">
                       <a
                         href={location.mapUrl}
