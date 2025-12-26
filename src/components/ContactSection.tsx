@@ -27,24 +27,29 @@ const ContactSection = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const contactInfo = [
+  const locations = [
     {
-      icon: Phone,
-      label: "Phone",
-      value: "+254 700 000 000",
-      href: "tel:+254700000000",
+      name: "Main Office - Ruiru",
+      address: "Off Eastern Bypass, Ruiru, Kenya",
+      phone: "+254 712 345 678",
+      mapUrl: "https://www.google.com/maps/place/1%C2%B009'42.7%22S+36%C2%B056'54.3%22E/@-1.16186,36.94841,17z",
+      embedUrl: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d997.5!2d36.94841!3d-1.16186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMcKwMDknNDIuNyJTIDM2wrA1Nic1NC4zIkU!5e0!3m2!1sen!2ske!4v1",
     },
+    {
+      name: "Kikuyu Branch",
+      address: "Kikuyu Town, Kiambu County, Kenya",
+      phone: "+254 798 765 432",
+      mapUrl: "https://www.google.com/maps/search/Kikuyu+Kenya",
+      embedUrl: "",
+    },
+  ];
+
+  const generalInfo = [
     {
       icon: Mail,
       label: "Email",
       value: "info@melamartscaffolding.com",
       href: "mailto:info@melamartscaffolding.com",
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "Nairobi, Kenya",
-      href: "#",
     },
     {
       icon: Clock,
@@ -73,38 +78,69 @@ const ContactSection = () => {
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-6">
+            {/* Locations */}
             <div className="card-elevated p-6">
               <h3 className="font-heading text-xl font-bold text-foreground mb-6">
-                Contact Information
+                Our Locations
               </h3>
-              <div className="space-y-5">
-                {contactInfo.map((info) => (
+              <div className="space-y-6">
+                {locations.map((location, index) => (
+                  <div key={index} className="pb-5 border-b border-border last:border-b-0 last:pb-0">
+                    <h4 className="font-semibold text-foreground mb-3">{location.name}</h4>
+                    <div className="space-y-3">
+                      <a
+                        href={location.mapUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-start gap-3 group"
+                      >
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors">
+                          <MapPin className="h-4 w-4 text-primary group-hover:text-primary-foreground transition-colors" />
+                        </div>
+                        <div className="text-sm text-muted-foreground group-hover:text-primary transition-colors pt-2">
+                          {location.address}
+                        </div>
+                      </a>
+                      <a
+                        href={`tel:${location.phone.replace(/\s/g, '')}`}
+                        className="flex items-start gap-3 group"
+                      >
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors">
+                          <Phone className="h-4 w-4 text-primary group-hover:text-primary-foreground transition-colors" />
+                        </div>
+                        <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors pt-2">
+                          {location.phone}
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* General Info */}
+            <div className="card-elevated p-6">
+              <h3 className="font-heading text-xl font-bold text-foreground mb-6">
+                General Inquiries
+              </h3>
+              <div className="space-y-4">
+                {generalInfo.map((info) => (
                   <a
                     key={info.label}
                     href={info.href}
-                    className="flex items-start gap-4 group"
+                    className="flex items-start gap-3 group"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors">
-                      <info.icon className="h-5 w-5 text-primary group-hover:text-primary-foreground transition-colors" />
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary transition-colors">
+                      <info.icon className="h-4 w-4 text-primary group-hover:text-primary-foreground transition-colors" />
                     </div>
                     <div>
-                      <div className="text-sm text-muted-foreground mb-1">{info.label}</div>
-                      <div className="font-medium text-foreground group-hover:text-primary transition-colors">
+                      <div className="text-xs text-muted-foreground mb-0.5">{info.label}</div>
+                      <div className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
                         {info.value}
                       </div>
                     </div>
                   </a>
                 ))}
-              </div>
-            </div>
-
-            {/* Map Placeholder */}
-            <div className="card-elevated overflow-hidden">
-              <div className="h-48 bg-muted flex items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="h-10 w-10 text-muted-foreground mx-auto mb-2" />
-                  <p className="text-sm text-muted-foreground">Interactive Map</p>
-                </div>
               </div>
             </div>
           </div>
