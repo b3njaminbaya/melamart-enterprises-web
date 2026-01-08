@@ -1,8 +1,19 @@
 import heroImage from "@/assets/hero-construction.jpg";
 import { Button } from "@/components/ui/button";
 import { Phone, FileText, ChevronDown } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const HeroSection = () => {
+  const branches = [
+    { name: "Ruiru Branch", phone: "+254758502216", displayPhone: "+254 758 502 216" },
+    { name: "Kikuyu Branch", phone: "+254758445822", displayPhone: "+254 758 445 822" },
+  ];
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Image */}
@@ -45,11 +56,30 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style={{ animationDelay: "0.3s" }}>
-            <Button variant="hero" size="xl" className="w-full sm:w-auto gap-3">
-              <Phone className="h-5 w-5" />
-              Call Now
-            </Button>
-            <Button variant="heroOutline" size="xl" className="w-full sm:w-auto gap-3">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="hero" size="xl" className="w-full sm:w-auto gap-3">
+                  <Phone className="h-5 w-5" />
+                  Call Now
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                {branches.map((branch) => (
+                  <DropdownMenuItem key={branch.phone} asChild>
+                    <a href={`tel:${branch.phone}`} className="flex flex-col items-start cursor-pointer">
+                      <span className="font-medium">{branch.name}</span>
+                      <span className="text-sm text-muted-foreground">{branch.displayPhone}</span>
+                    </a>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Button 
+              variant="heroOutline" 
+              size="xl" 
+              className="w-full sm:w-auto gap-3"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
               <FileText className="h-5 w-5" />
               Request a Quote
             </Button>

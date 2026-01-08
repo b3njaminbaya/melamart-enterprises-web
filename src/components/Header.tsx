@@ -2,6 +2,12 @@ import logo from "@/assets/melamart-logo.png";
 import { Button } from "@/components/ui/button";
 import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,6 +19,16 @@ const Header = () => {
     { label: "Why Us", href: "#why-us" },
     { label: "Contact", href: "#contact" },
   ];
+
+  const branches = [
+    { name: "Ruiru Branch", phone: "+254758502216", displayPhone: "+254 758 502 216" },
+    { name: "Kikuyu Branch", phone: "+254758445822", displayPhone: "+254 758 445 822" },
+  ];
+
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border shadow-card">
@@ -42,11 +58,25 @@ const Header = () => {
 
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="default" size="default" className="gap-2">
-              <Phone className="h-4 w-4" />
-              Call Now
-            </Button>
-            <Button variant="secondary" size="default">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="default" size="default" className="gap-2">
+                  <Phone className="h-4 w-4" />
+                  Call Now
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                {branches.map((branch) => (
+                  <DropdownMenuItem key={branch.phone} asChild>
+                    <a href={`tel:${branch.phone}`} className="flex flex-col items-start cursor-pointer">
+                      <span className="font-medium">{branch.name}</span>
+                      <span className="text-sm text-muted-foreground">{branch.displayPhone}</span>
+                    </a>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Button variant="secondary" size="default" onClick={scrollToContact}>
               Request Quote
             </Button>
           </div>
@@ -76,11 +106,25 @@ const Header = () => {
                 </a>
               ))}
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-border">
-                <Button variant="default" className="w-full gap-2">
-                  <Phone className="h-4 w-4" />
-                  Call Now
-                </Button>
-                <Button variant="secondary" className="w-full">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="default" className="w-full gap-2">
+                      <Phone className="h-4 w-4" />
+                      Call Now
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="w-56">
+                    {branches.map((branch) => (
+                      <DropdownMenuItem key={branch.phone} asChild>
+                        <a href={`tel:${branch.phone}`} className="flex flex-col items-start cursor-pointer">
+                          <span className="font-medium">{branch.name}</span>
+                          <span className="text-sm text-muted-foreground">{branch.displayPhone}</span>
+                        </a>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+                <Button variant="secondary" className="w-full" onClick={scrollToContact}>
                   Request Quote
                 </Button>
               </div>
