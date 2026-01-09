@@ -1,4 +1,4 @@
-import logo from "@/assets/melamart-logo.png";
+import logo from "@/assets/melamart-logo-icon.png";
 import { Button } from "@/components/ui/button";
 import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -31,12 +31,16 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-sm border-b border-border shadow-card">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white backdrop-blur-sm border-b border-border shadow-card">
       <div className="container-custom">
         <div className="flex items-center justify-between h-20 px-4 md:px-8">
           {/* Logo */}
-          <a href="#home" className="flex items-center">
-            <img src={logo} alt="Melamart Enterprises Limited" className="h-14 w-auto" />
+          <a href="#home" className="flex items-center gap-3">
+            <img src={logo} alt="Melamart Enterprises Limited" className="h-12 w-auto" />
+            <div className="hidden sm:block">
+              <span className="font-heading font-bold text-lg text-primary block leading-tight">Melamart</span>
+              <span className="text-xs text-muted-foreground">Enterprises Limited</span>
+            </div>
           </a>
 
           {/* Desktop Navigation */}
@@ -89,7 +93,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-border bg-card animate-fade-in">
+          <div className="lg:hidden border-t border-border bg-white animate-fade-in">
             <nav className="flex flex-col py-4 px-4">
               {navLinks.map((link) => (
                 <a
