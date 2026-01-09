@@ -28,13 +28,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="sm:col-span-2 lg:col-span-1">
             <a href="#home" className="flex items-center gap-3 mb-6">
-              <img src={logo} alt="Melamart Logo" className="h-12 w-auto brightness-0 invert" />
-              <div>
-                <span className="font-heading font-bold text-lg text-primary-foreground block leading-tight">
-                  Melamart
-                </span>
-                <span className="text-xs text-primary-foreground/70">Enterprises Limited</span>
-              </div>
+              <img src={logo} alt="Melamart Enterprises Limited" className="h-16 w-auto" />
             </a>
             <p className="text-primary-foreground/80 mb-6 leading-relaxed">
               Your trusted partner for quality scaffolding and construction equipment. Available for hire and sale.
