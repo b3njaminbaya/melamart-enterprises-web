@@ -36,7 +36,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-20 px-4 md:px-8">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-3">
-            <img src={logo} alt="Melamart Enterprises Limited" className="h-12 w-auto" />
+            <img src={logo} alt="Melamart Enterprises Limited" className="h-16 w-auto" />
             <div className="hidden sm:block">
               <span className="font-heading font-bold text-lg text-primary block leading-tight">Melamart</span>
               <span className="text-xs text-muted-foreground">Enterprises Limited</span>
