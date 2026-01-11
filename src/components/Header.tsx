@@ -33,10 +33,10 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white backdrop-blur-sm border-b border-border shadow-card">
       <div className="container-custom">
-        <div className="flex items-center justify-between h-24 px-4 md:px-8">
+        <div className="flex items-center justify-between h-28 px-4 md:px-8">
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-3">
-            <img src={logo} alt="Melamart Enterprises Limited" className="h-20 w-auto" />
+          <a href="#home" className="flex items-center gap-2">
+            <img src={logo} alt="Melamart Enterprises Limited" className="h-24 w-auto" />
             <div className="hidden sm:block">
               <span className="font-heading font-bold text-lg text-primary block leading-tight">Melamart</span>
               <span className="text-xs text-muted-foreground">Enterprises Limited</span>

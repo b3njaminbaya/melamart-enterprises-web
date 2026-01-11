@@ -27,8 +27,8 @@ const Footer = () => {
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
           {/* Company Info */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <a href="#home" className="flex items-center gap-3 mb-6">
-              <img src={logo} alt="Melamart Enterprises Limited" className="h-20 w-auto" />
+            <a href="#home" className="flex items-center gap-2 mb-6">
+              <img src={logo} alt="Melamart Enterprises Limited" className="h-24 w-auto" />
               <div>
                 <span className="font-heading font-bold text-lg text-primary block leading-tight">Melamart</span>
                 <span className="text-xs text-muted-foreground">Enterprises Limited</span>
