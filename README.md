@@ -1,73 +1,110 @@
-# Welcome to your Lovable project
+# Melamart Enterprises — Public Website
 
-## Project info
+Marketing website for **Melamart Enterprises Limited**, a Kenyan company that hires out and sells scaffolding and construction equipment from branches in **Ruiru** and **Kikuyu**.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Live site:** https://melamart-enterprises.vercel.app
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## What the site includes
 
-**Use Lovable**
+- **Hero** with call-to-action buttons to call either branch or request a quote
+- **About**, **Products & Services** (scaffolding & platforms, ladders & access equipment, pipes, clamps & accessories, construction support materials) and **Why Us** sections
+- **Contact** section with both branches' phone numbers and addresses, email, and a **Request a Quote** form
+- SEO meta tags (react-helmet-async) and a custom 404 page
+- Responsive layout for phones, tablets and desktops
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+### Contact details used on the site
 
-Changes made via Lovable will be committed automatically to this repo.
+| Branch | Phone | Address |
+|---|---|---|
+| Ruiru (main office) | +254 758 502 216 | Off Eastern Bypass, Ruiru |
+| Kikuyu | +254 758 445 822 | Thogoto – Mutarakwa Road, opposite Gikambura Primary School |
 
-**Use your preferred IDE**
+Email: info@melamartscaffolding.com
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Quote form
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The form posts to [FormSubmit](https://formsubmit.co) and is delivered to **info@melamartscaffolding.com** — no backend or API keys needed.
+The **first** submission triggers a one-time activation email to that inbox; someone must click the confirmation link before messages are delivered.
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Tech stack
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+| Layer | Technology |
+|---|---|
+| Framework | React 18 + TypeScript, built with Vite |
+| UI | Tailwind CSS, shadcn/ui (Radix UI), lucide-react icons |
+| Routing | React Router (single page + 404) |
+| SEO | react-helmet-async |
+| Fonts | Montserrat (headings) + Open Sans (body), Google Fonts |
+| Hosting | Vercel |
 
-# Step 3: Install the necessary dependencies.
-npm i
+Brand colours: Navy `#0b3d5e` (primary) and Yellow `#f5a800` (secondary), defined in `src/index.css`.
+The admin panel (`apps/admin`) uses the same design system.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+---
+
+## Run locally
+
+Requires Node.js 18+ and npm.
+
+```bash
+npm install
+npm run dev        # http://localhost:8080
 ```
 
-**Edit a file directly in GitHub**
+Other scripts:
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+npm run build      # production build into dist/
+npm run preview    # serve the production build locally
+npm run lint
+```
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project structure
 
-## What technologies are used for this project?
+```
+src/
+├── App.tsx                 # Routes: / and a catch-all 404
+├── pages/
+│   ├── Index.tsx           # Home page + SEO tags
+│   └── NotFound.tsx
+├── components/
+│   ├── Header.tsx          # Logo, navigation, Call Now / Request Quote
+│   ├── HeroSection.tsx
+│   ├── AboutSection.tsx
+│   ├── ServicesSection.tsx
+│   ├── WhyUsSection.tsx
+│   ├── ContactSection.tsx  # Branches, quote form (FormSubmit)
+│   ├── Footer.tsx
+│   └── ui/                 # shadcn/ui components
+├── assets/                 # Logo and hero images
+└── index.css               # Design tokens, fonts, Tailwind layers
+vercel.json                 # Vercel build settings + SPA rewrite
+```
 
-This project is built with:
+---
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Deployment (Vercel)
 
-## How can I deploy this project?
+The site is deployed to the Vercel project **melamart-enterprises**.
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+```bash
+vercel deploy --prod
+```
 
-## Can I connect a custom domain to my Lovable project?
+`vercel.json` sets the Vite build (`npm run build` → `dist/`) and rewrites unknown paths to `index.html` so React Router can show the 404 page.
+No environment variables are required.
 
-Yes, you can!
+To use the company domain (e.g. `melamartscaffolding.com`), add it in the Vercel dashboard under **Project → Settings → Domains** and set the DNS records Vercel shows.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Notes
+
+- Keep the Google Fonts `@import` as the **first line** of `src/index.css`; if anything comes before it, the production build drops it and the brand fonts do not load.
+- `src/assets/melamart-logo-icon.png` is ~2 MB but displayed small — compressing it would speed up the first page load, especially on mobile data.
